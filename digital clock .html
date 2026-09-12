@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Digital Clock</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #1e3c72, #2a5298);
+        padding: 20px;
+    }
+
+    .clock-box {
+        width: 100%;
+        max-width: 420px;
+        background: rgba(255,255,255,0.12);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255,255,255,0.2);
+        border-radius: 25px;
+        padding: 40px 25px;
+        text-align: center;
+        color: white;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    }
+
+    h1 {
+        font-size: 22px;
+        margin-bottom: 25px;
+        letter-spacing: 2px;
+    }
+
+    #time {
+        font-size: 48px;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+
+    #date {
+        font-size: 17px;
+        opacity: 0.9;
+    }
+
+    .credit {
+        margin-top: 35px;
+        font-size: 12px;
+        opacity: 0.8;
+    }
+
+    @media (max-width: 400px) {
+        #time {
+            font-size: 38px;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="clock-box">
+    <h1>DIGITAL CLOCK</h1>
+
+    <div id="time">00:00:00</div>
+
+    <div id="date">Loading date...</div>
+
+    <div class="credit">
+        Created by <b>Manisha Khangar</b>
+    </div>
+</div>
+
+<script>
+function updateClock() {
+    const now = new Date();
+
+    let hours = now.getHours();
+    let minutes = now.getMinutes();
+    let seconds = now.getSeconds();
+
+    hours = hours < 10 ? "0" + hours : hours;
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    document.getElementById("time").textContent =
+        hours + ":" + minutes + ":" + seconds;
+
+    const options = {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+    };
+
+    document.getElementById("date").textContent =
+        now.toLocaleDateString("en-US", options);
+}
+
+updateClock();
+setInterval(updateClock, 1000);
+</script>
+
+</body>
+</html>
